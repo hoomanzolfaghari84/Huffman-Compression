@@ -9,20 +9,34 @@ public class HuffmanTree {
 
     public HuffmanTree(Node root,char[] chars) {
         this.root = root;
+        this.chars = chars;
+
+        generateCodes();
     }
 
-    private String[] generateCodes(char[] chars,HuffmanTree huffmanTree){
+    // generate the binary codes for each character in the text
+    private void generateCodes(){
 
-        String code = "";
+        codes = new String[chars.length];
+        recursiveCodeFinder("",root);
+    }
 
-        String[] codes = new String[chars.length];
+    private void recursiveCodeFinder(String code, Node node){
+        if (node == null) return;
 
-        for (int i = 0; i < chars.length; i++) {
-
+        if(node instanceof Leaf){
+            Leaf leaf = (Leaf) node;
+            for (int i = 0; i < codes.length ; i++) {  // TODO replace with a map
+                if(chars[i] == leaf.aChar){
+                    codes[i] = code;
+                    return;
+                }
+            }
         }
 
+        recursiveCodeFinder(code+"0",node.leftChild);
+        recursiveCodeFinder(code+"1",node.rightChild);
 
-        return codes;
     }
 
     public HuffmanTree() {
@@ -34,5 +48,9 @@ public class HuffmanTree {
 
     public void setRoot(Node root) {
         this.root = root;
+    }
+
+    public String[] getCodes() {
+        return codes;
     }
 }

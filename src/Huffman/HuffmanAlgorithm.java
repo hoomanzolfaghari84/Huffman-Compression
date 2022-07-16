@@ -20,6 +20,10 @@ public class HuffmanAlgorithm {
         }
 
 
+        String[] codes = makeTree(chars,frequencies).getCodes();
+
+
+
 
         return null;
     }
