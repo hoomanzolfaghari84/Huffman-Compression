@@ -4,35 +4,57 @@ import Huffman.exceptions.HuffmanAlgorithmException;
 import Huffman.exceptions.HuffmanHeapException;
 import Huffman.trees.HuffmanHeap;
 import Huffman.trees.HuffmanTree;
+import Huffman.trees.Leaf;
 import Huffman.trees.Node;
 
 public class HuffmanAlgorithm {
 
-    // returns the compressed format of the text consisting of bits and a tree
+    public HuffmanCompressed compressText(String text){
+        HuffmanMap huffmanMap = findFrequencies(text);
+        HuffmanTree huffmanTree = makeTree(huffmanMap);
+        findCodes(huffmanMap,huffmanTree);
 
 
-    public HuffmanCompressed compressText(String text,char[] chars, int[] frequencies) throws HuffmanAlgorithmException {
-        if(chars.length != frequencies.length){
-            throw new HuffmanHeapException();
+        StringBuilder compressedText = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            compressedText.append(huffmanMap.getCode(text.charAt(i)));
         }
-        if(text.isEmpty() || chars.length==0){
-            throw new HuffmanAlgorithmException();
-        }
 
 
-        String[] codes = makeTree(chars,frequencies).getCodes();
+        return new HuffmanCompressed(huffmanTree,compressedText.toString());
+    }
 
-
-
-
-        return null;
+    private void findCodes(HuffmanMap huffmanMap,HuffmanTree huffmanTree){
+        recursiveCodeFinderByArray("",huffmanTree.getRoot(),huffmanMap);
     }
 
 
+    private void recursiveCodeFinderByArray(String code, Node node,HuffmanMap huffmanMap){
+        if (node == null) return;
+
+        if(node instanceof Leaf){
+            Leaf leaf = (Leaf) node;
+            huffmanMap.put(leaf.getCharacter(),code);
+        }
+
+        recursiveCodeFinderByArray(code+"0",node.getLeftChild(),huffmanMap);
+        recursiveCodeFinderByArray(code+"1",node.getRightChild(),huffmanMap);
+
+    }
+
+    private HuffmanMap findFrequencies(String text){
+        HuffmanMap huffmanMap = new HuffmanMap();
+        for (char character: text.toCharArray()) {
+            huffmanMap.add(character);
+        }
+        return huffmanMap;
+    }
 
 
-    private HuffmanTree makeTree(char[] chars, int[] frequencies) throws HuffmanHeapException {
-        HuffmanHeap huffmanHeap = new HuffmanHeap(chars,frequencies);
+    private HuffmanTree makeTree(HuffmanMap huffmanMap){
+
+        HuffmanHeap huffmanHeap = new HuffmanHeap(huffmanMap);
 
         while (huffmanHeap.getSize()>1){
             Node left = huffmanHeap.pop();
@@ -46,9 +68,8 @@ public class HuffmanAlgorithm {
 
         }
 
-        return new HuffmanTree(huffmanHeap.pop(),chars);
+        return new HuffmanTree(huffmanHeap.pop());
     }
-
 
 
     // returns the text extracted from compressed text which was compressed by huffman algorithm and consists of bits and a tree

@@ -1,46 +1,30 @@
 package Huffman.trees;
 
+import Huffman.HuffmanMap;
+
 public class HuffmanTree {
 
     Node root;
 
-    String[] codes;
-    char[] chars;
 
-    public HuffmanTree(Node root,char[] chars) {
-        this.root = root;
-        this.chars = chars;
 
-        generateCodes();
-    }
 
-    // generate the binary codes for each character in the text
-    private void generateCodes(){
-
-        codes = new String[chars.length];
-        recursiveCodeFinder("",root);
-    }
-
-    private void recursiveCodeFinder(String code, Node node){
-        if (node == null) return;
-
-        if(node instanceof Leaf){
-            Leaf leaf = (Leaf) node;
-            for (int i = 0; i < codes.length ; i++) {  // TODO replace with a map
-                if(chars[i] == leaf.aChar){
-                    codes[i] = code;
-                    return;
-                }
-            }
-        }
-
-        recursiveCodeFinder(code+"0",node.leftChild);
-        recursiveCodeFinder(code+"1",node.rightChild);
-
-    }
 
     public HuffmanTree() {
+
     }
+
+
+
+    public HuffmanTree(Node root) {
+        this.root = root;
+
+    }
+
+
+
+
+
 
     public Node getRoot() {
         return root;
@@ -50,7 +34,4 @@ public class HuffmanTree {
         this.root = root;
     }
 
-    public String[] getCodes() {
-        return codes;
-    }
 }

@@ -1,30 +1,31 @@
 package Huffman.trees;
 
+import Huffman.HuffmanMap;
 import Huffman.exceptions.HuffmanHeapException;
 
 public class HuffmanHeap {
     Node[] nodes;
     int size;
-    public HuffmanHeap(char[] chars,int[] frequencies) throws HuffmanHeapException {
 
-        if(chars.length != frequencies.length) throw new HuffmanHeapException();
-
+    public HuffmanHeap(HuffmanMap huffmanMap){
         int arraySize;
 
-        size = chars.length;
-        arraySize = chars.length%2 == 0 ? chars.length:chars.length+1;
+        size = huffmanMap.getSize();
+        arraySize = size%2 == 0 ? size:1; //TODO change it to be for powers of 2
 
         nodes = new Node[arraySize];
-        for (int i = 0; i < chars.length; i++) {
-            nodes[i] = new Leaf(chars[i],frequencies[i]);
+        int i = 0;
+        for (char character:huffmanMap.getCharacters()) {
+            nodes[i] = new Leaf(character,huffmanMap.getFrequency(character));
+            i++;
         }
-        for (int i = chars.length; i < arraySize ; i++) {
-            nodes[i] = null;
+        for (int j = i+1; j < arraySize; j++) {
+            nodes[j] = null;
         }
 
         makeNodesToHeap();
-
     }
+
     public void printNodes(){
         System.out.println("size is"+size);
         for (int i = 0; i < nodes.length; i++) {
@@ -98,9 +99,7 @@ public class HuffmanHeap {
         nodes[0] = nodes[size-1];
         nodes[size-1] = null;
         size--;
-        System.out.println("before size="+size);
-        printNodes();
-        System.out.println("after");
+
         minHeapify(0);
 
 

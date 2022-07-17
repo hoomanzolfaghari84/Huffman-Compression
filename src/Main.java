@@ -1,16 +1,21 @@
+import Huffman.HuffmanAlgorithm;
+import Huffman.HuffmanMap;
 import Huffman.exceptions.HuffmanHeapException;
 import Huffman.trees.HuffmanHeap;
 import Huffman.trees.Node;
 
+import java.util.HashMap;
+
 public class Main {
     public static void main(String[] args) {
-        char[] chars = new char[]{'a','b','c','f','r'};
-        int[] ints = new int[]{5,3,9,4,2};
 
-        char[] chars1 = new char[2];
+        String text = "hello";
+
+        HuffmanAlgorithm huffmanAlgorithm = new HuffmanAlgorithm();
 
 
 
+        System.out.println(huffmanAlgorithm.compressText(text).getCompressedText());
 
 
     }

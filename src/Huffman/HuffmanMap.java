@@ -9,17 +9,26 @@ public class HuffmanMap {
 
     MapNode[] mapNodes;
 
+    int size;
+
+    List<Character> characters;
 
     public HuffmanMap(int TABLE_SIZE) {
         this.TABLE_SIZE = TABLE_SIZE;
 
         mapNodes = new MapNode[TABLE_SIZE];
+        size = 0;
+
+        characters = new LinkedList<>();
     }
 
     public HuffmanMap() {
         TABLE_SIZE = 16;
 
         mapNodes = new MapNode[TABLE_SIZE];
+        size = 0;
+
+        characters = new LinkedList<>();
     }
 
     public int getFrequency(char character){
@@ -62,6 +71,8 @@ public class HuffmanMap {
         if(mapNodes[index] == null){
             mapNodes[index] = new MapNode(character);
             mapNodes[index].code = code;
+            size++;
+            characters.add(character);
             return;
         }
         MapNode mapNode = mapNodes[index];
@@ -80,6 +91,8 @@ public class HuffmanMap {
 
         mapNode.next = new MapNode(character);
         mapNode.next.code = code;
+        size++;
+        characters.add(character);
     }
 
     public void put(char character, int frequency){
@@ -88,6 +101,8 @@ public class HuffmanMap {
         if(mapNodes[index] == null){
             mapNodes[index] = new MapNode(character);
             mapNodes[index].frequency = frequency;
+            size++;
+            characters.add(character);
             return;
         }
         MapNode mapNode = mapNodes[index];
@@ -106,6 +121,8 @@ public class HuffmanMap {
 
         mapNode.next = new MapNode(character);
         mapNode.next.frequency = frequency;
+        size++;
+        characters.add(character);
 
     }
 
@@ -115,6 +132,8 @@ public class HuffmanMap {
         if(mapNodes[index] == null){
             mapNodes[index] = new MapNode(character);
             mapNodes[index].frequency = 1;
+            size++;
+            characters.add(character);
             return;
         }
 
@@ -134,10 +153,12 @@ public class HuffmanMap {
 
         mapNode.next = new MapNode(character);
         mapNode.next.frequency = 1;
+        size++;
+        characters.add(character);
     }
 
     private int hash(char character){
-        return Character.getNumericValue(character) % TABLE_SIZE;
+        return Character.hashCode(character) % TABLE_SIZE;
     }
 
     static class MapNode{
@@ -182,5 +203,43 @@ public class HuffmanMap {
         public void setNext(MapNode next) {
             this.next = next;
         }
+    }
+
+    public void print(){
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            System.out.println(i+".");
+            MapNode mapNode = mapNodes[i];
+            while (mapNode != null){
+
+                System.out.print(mapNode.character+" ");
+
+                mapNode = mapNode.next;
+            }
+            System.out.println();
+        }
+    }
+
+    public void printCodes(){
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            System.out.println(i+".");
+            MapNode mapNode = mapNodes[i];
+            while (mapNode != null){
+
+                System.out.print(mapNode.character+": "+mapNode.code+" ");
+
+                mapNode = mapNode.next;
+            }
+            System.out.println();
+        }
+    }
+
+
+
+    public int getSize() {
+        return size;
+    }
+
+    public List<Character> getCharacters() {
+        return characters;
     }
 }

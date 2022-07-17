@@ -1,10 +1,14 @@
 package Huffman.trees;
 
 public class Leaf extends Node{
-    char aChar;
+    char character;
 
-    public Leaf(char aChar,int frequency) {
+    public Leaf(char character,int frequency) {
         super(frequency);
-        this.aChar = aChar;
+        this.character = character;
+    }
+
+    public char getCharacter() {
+        return character;
     }
 }
