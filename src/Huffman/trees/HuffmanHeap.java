@@ -8,20 +8,29 @@ public class HuffmanHeap {
     int size;
 
     public HuffmanHeap(HuffmanMap huffmanMap){
-        int arraySize;
+        int arraySize =1;
 
         size = huffmanMap.getSize();
-        arraySize = size%2 == 0 ? size:1; //TODO change it to be for powers of 2
+
+        while (arraySize<size){
+            arraySize = arraySize *2;
+        }
+
+
 
         nodes = new Node[arraySize];
         int i = 0;
         for (char character:huffmanMap.getCharacters()) {
+
             nodes[i] = new Leaf(character,huffmanMap.getFrequency(character));
             i++;
+
         }
+
         for (int j = i+1; j < arraySize; j++) {
             nodes[j] = null;
         }
+
 
         makeNodesToHeap();
     }

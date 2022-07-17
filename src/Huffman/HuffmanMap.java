@@ -32,16 +32,23 @@ public class HuffmanMap {
     }
 
     public int getFrequency(char character){
+
         int index = hash(character);
 
         if(mapNodes[index] == null) return 0;
 
         MapNode mapNode = mapNodes[index];
 
+
+
         while (mapNode.next != null){
             if(mapNode.character == character)
                 return mapNode.frequency;
+
+            mapNode = mapNode.next;
+
         }
+
 
         if(mapNode.character == character) return mapNode.frequency;
 
@@ -58,6 +65,8 @@ public class HuffmanMap {
         while (mapNode.next != null){
             if(mapNode.character == character)
                 return mapNode.code;
+
+            mapNode = mapNode.next;
         }
 
         if(mapNode.character == character) return mapNode.code;
@@ -212,6 +221,19 @@ public class HuffmanMap {
             while (mapNode != null){
 
                 System.out.print(mapNode.character+" ");
+
+                mapNode = mapNode.next;
+            }
+            System.out.println();
+        }
+    }
+    public void printFrequencies(){
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            System.out.println(i+".");
+            MapNode mapNode = mapNodes[i];
+            while (mapNode != null){
+
+                System.out.print(mapNode.character+": "+ mapNode.frequency+" ");
 
                 mapNode = mapNode.next;
             }

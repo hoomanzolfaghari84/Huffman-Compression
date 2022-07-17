@@ -11,7 +11,9 @@ public class HuffmanAlgorithm {
 
     public HuffmanCompressed compressText(String text){
         HuffmanMap huffmanMap = findFrequencies(text);
+
         HuffmanTree huffmanTree = makeTree(huffmanMap);
+
         findCodes(huffmanMap,huffmanTree);
 
 
@@ -48,6 +50,7 @@ public class HuffmanAlgorithm {
         for (char character: text.toCharArray()) {
             huffmanMap.add(character);
         }
+
         return huffmanMap;
     }
 
@@ -55,6 +58,7 @@ public class HuffmanAlgorithm {
     private HuffmanTree makeTree(HuffmanMap huffmanMap){
 
         HuffmanHeap huffmanHeap = new HuffmanHeap(huffmanMap);
+
 
         while (huffmanHeap.getSize()>1){
             Node left = huffmanHeap.pop();
@@ -78,7 +82,7 @@ public class HuffmanAlgorithm {
 
         Node node = huffmanCompressed.getHuffmanTree().getRoot();
 
-        String text = "";
+        StringBuilder text = new StringBuilder();
 
         for (int i = 0; i < huffmanCompressed.getCompressedText().length(); i++) {
             char c = huffmanCompressed.getCompressedText().charAt(i);
@@ -90,13 +94,13 @@ public class HuffmanAlgorithm {
 
             if(node instanceof Leaf){
                 Leaf leaf = (Leaf) node;
-                text += leaf.getCharacter();
+                text.append(leaf.getCharacter());
 
                 node = huffmanCompressed.getHuffmanTree().getRoot();
             }
 
         }
-        return text;
+        return text.toString();
     }
 
 

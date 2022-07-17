@@ -10,10 +10,11 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
 
-        String text = "hello";
+
+
+        String text = "hello world! omg this is awesome :|";
 
         HuffmanAlgorithm huffmanAlgorithm = new HuffmanAlgorithm();
-
 
         HuffmanCompressed huffmanCompressed = huffmanAlgorithm.compressText(text);
 
