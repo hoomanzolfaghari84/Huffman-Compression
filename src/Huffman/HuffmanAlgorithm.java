@@ -73,9 +73,30 @@ public class HuffmanAlgorithm {
 
 
     // returns the text extracted from compressed text which was compressed by huffman algorithm and consists of bits and a tree
+
     public String extractText(HuffmanCompressed huffmanCompressed){
 
-        return null;
+        Node node = huffmanCompressed.getHuffmanTree().getRoot();
+
+        String text = "";
+
+        for (int i = 0; i < huffmanCompressed.getCompressedText().length(); i++) {
+            char c = huffmanCompressed.getCompressedText().charAt(i);
+            if(c == '0'){
+                node = node.getLeftChild();
+            }else {
+                node = node.getRightChild();
+            }
+
+            if(node instanceof Leaf){
+                Leaf leaf = (Leaf) node;
+                text += leaf.getCharacter();
+
+                node = huffmanCompressed.getHuffmanTree().getRoot();
+            }
+
+        }
+        return text;
     }
 
 

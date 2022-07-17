@@ -1,4 +1,5 @@
 import Huffman.HuffmanAlgorithm;
+import Huffman.HuffmanCompressed;
 import Huffman.HuffmanMap;
 import Huffman.exceptions.HuffmanHeapException;
 import Huffman.trees.HuffmanHeap;
@@ -14,9 +15,11 @@ public class Main {
         HuffmanAlgorithm huffmanAlgorithm = new HuffmanAlgorithm();
 
 
+        HuffmanCompressed huffmanCompressed = huffmanAlgorithm.compressText(text);
 
-        System.out.println(huffmanAlgorithm.compressText(text).getCompressedText());
+        System.out.println(huffmanCompressed.getCompressedText());
 
+        System.out.println(huffmanAlgorithm.extractText(huffmanCompressed));
 
     }
 }
