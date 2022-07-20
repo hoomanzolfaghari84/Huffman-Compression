@@ -5,15 +5,18 @@ import java.util.List;
 
 public class HuffmanMap {
 
-    final int TABLE_SIZE;
+    final int TABLE_SIZE; // the initial and final size of the array that holds each list of items with the same hash value
+                    // should make the size dynamic
 
-    MapNode[] mapNodes;
+    MapNode[] mapNodes; // the array that in each index holds a list of nodes items with the same hash value
 
-    int size;
+    int size; //the total number of items stored in the table
 
-    List<Character> characters;
+    List<Character> characters; // since the map does not implement a java collection we need a list to be able to loop
+                                // on all the stored items. the correct thing is to implement a collection or use an existing one,
+                                // but I was worried it wouldn't be allowed for the project
 
-    public HuffmanMap(int TABLE_SIZE) {
+    public HuffmanMap(int TABLE_SIZE) {  // constructor for a custom initial table size
         this.TABLE_SIZE = TABLE_SIZE;
 
         mapNodes = new MapNode[TABLE_SIZE];
@@ -23,7 +26,7 @@ public class HuffmanMap {
     }
 
     public HuffmanMap() {
-        TABLE_SIZE = 16;
+        TABLE_SIZE = 16; //the default table size
 
         mapNodes = new MapNode[TABLE_SIZE];
         size = 0;
@@ -31,6 +34,7 @@ public class HuffmanMap {
         characters = new LinkedList<>();
     }
 
+    // get the frequency value of the character key stored on the table
     public int getFrequency(char character){
 
         int index = hash(character);
@@ -38,7 +42,6 @@ public class HuffmanMap {
         if(mapNodes[index] == null) return 0;
 
         MapNode mapNode = mapNodes[index];
-
 
 
         while (mapNode.next != null){

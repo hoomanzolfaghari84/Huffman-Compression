@@ -2,7 +2,7 @@ package Huffman;
 
 import Huffman.trees.HuffmanTree;
 
-public class HuffmanCompressed {
+public class HuffmanCompressed { // the compressed file that can be decompressed by HuffmanAlgorithm using the tree to give the original text
 
     HuffmanTree huffmanTree;
     String compressedText;
@@ -19,5 +19,6 @@ public class HuffmanCompressed {
     public String getCompressedText() {
         return compressedText;
     }
+
 }
 
