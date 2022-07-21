@@ -10,7 +10,11 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
 
-        String text = "hello world ! \nis this \"awesome\" or what \\bob :)";
+//        String text = "hello world ! \nis this \"awesome\" or what \\bob :)";
+//        String text = " hello سلام" ;
+        String text = "";
+//        String text = "w�\u0019oy�i";
+
 
         HuffmanAlgorithm huffmanAlgorithm = new HuffmanAlgorithm();
 

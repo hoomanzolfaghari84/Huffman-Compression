@@ -3,7 +3,7 @@ package Huffman.trees;
 public class Node { // a basic tree node
 
     int frequency;  // frequency of the character if the node is a Leaf or just a value to show
-                    // the significance of the node's priority in a priority queue (huffman heap) which is the sum of the frequency the children
+                    // the significance of the node's priority in a priority queue (huffman heap) which is the sum of the frequency of the children if it's not a leaf
 
     Node leftChild;
     Node rightChild;

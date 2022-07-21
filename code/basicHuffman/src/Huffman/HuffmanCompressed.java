@@ -19,5 +19,6 @@ public class HuffmanCompressed { // the compressed file that can be decompressed
     public String getCompressedText() {
         return compressedText;
     }
+
 }
 

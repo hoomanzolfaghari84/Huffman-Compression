@@ -6,7 +6,7 @@ import java.util.List;
 public class HuffmanMap {
 
     final int TABLE_SIZE; // the initial and final size of the array that holds each list of items with the same hash value
-                    // should make the size dynamic
+                    // TODO should make the size dynamic
 
     MapNode[] mapNodes; // the array that in each index holds a list of nodes items with the same hash value
 

@@ -84,7 +84,7 @@ public class HuffmanHeap {
     public void push(Node node){
         size++;
 
-        if(size>nodes.length){ //check to see if we should increase the length of nodes array
+        if(size>nodes.length){ //check to see if we should increase the length of nodes array TODO make a load factor thingy
             increaseLength();
         }
 
@@ -108,15 +108,15 @@ public class HuffmanHeap {
         if(size == 0)
             return null;
 
-        Node node = nodes[0];
+        Node node = nodes[0];  //putting the last one in the place of the min
         nodes[0] = nodes[size-1];
         nodes[size-1] = null;
         size--;
 
-        minHeapify(0);
+        minHeapify(0); //we need to heapfy because of the last swap
 
 
-        if(size < nodes.length/2){
+        if(size < nodes.length/2){ //check to see if we should decease the length of nodes array TODO make a load factor thingy
             decreaseSize();
         }
 
@@ -148,7 +148,7 @@ public class HuffmanHeap {
         }
         nodes = nodes1;
     }
-
+    //returning the number of nodes in the array
     public int getSize(){
         return this.size;
     }
